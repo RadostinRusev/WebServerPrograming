@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Register</title>
+</head>
+<body>
+
+<div class="card-body">
+    <form th:action="@{/products/create}" method="post" th:object="${product}">
+        <input type="hidden" th:field="*{carid}">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Name</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" required aria-describedby="emailHelp" th:field="*{name}">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">description</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" th:field="*{description}">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">priceToBuy</label>
+            <input type="number" class="form-control" id="priceToBuy" th:field="*{priceToBuy}">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">priceToSell</label>
+            <input type="number" required class="form-control" id="priceToSell" th:field="*{priceToSell}">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">number</label>
+            <input type="number"  required class="form-control" id="number" th:field="*{number}">
+        </div>
+        <div class="form-group">
+            <label for="cars">category</label>
+            <select id="cars" name="cars" th:field="*{category}">
+                <option value="Office materials">Office materials</option>
+                <option value="Building materials">Building materials</option>
+                <option value="Food">Food</option>
+            </select>
+
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>

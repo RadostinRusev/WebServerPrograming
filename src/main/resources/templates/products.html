@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{fragments/head}"></div>
+<style>
+	.grid-container {
+  display: grid;
+  grid-template-columns: 12% 12% 12% 12% 12% 12% 20% auto;
+  background-color: rgb(122,122,122);
+  padding: 10px;
+}
+	.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  font-size: 18px;
+  text-align: center;
+}
+</style>
+<body>
+	<div class="grid-container">
+		<span class="grid-item">Name</span>
+		<span class="grid-item">Buying Price</span>
+		<span class="grid-item">Selling Price</span>
+		<span class="grid-item">Available  Products</span>
+		<span class="grid-item">Category</span>
+		<span class="grid-item">Product number</span>
+		<form th:action="@{/products}" method="get" th:object="${search}">
+			<select id="cars" name="cars" th:field="*{dropdown}">
+				<option value="Office materials">Office materials</option>
+				<option value="Building materials">Building materials</option>
+				<option value="Food">Food</option>
+				<option value="Empty">empty</option>
+				<option value="All">All</option>
+				<input type="text" id="search" th:field="*{id}">
+				<button type="submit">Search</button>
+			</select>
+		</form>
+		<span class="grid-item">
+				<span> <a href="/products/create" class="grid-item"> Create</a></span>
+		</span>
+	</div>
+	<div th:if="${visible}">
+		<span th:each="product : ${products}" class="grid-container">
+			<div class="grid-item">
+				<span th:text="${product.name}">}</span>
+			</div>
+			<div class="grid-item">
+				<span th:text="${product.priceToBuy}">}</span>
+			</div>
+			<div class="grid-item">
+				<span th:text="${product.priceToSell}">}</span>
+			</div>
+			<div class="grid-item">
+				<span th:text="${product.number}">}</span>
+			</div>
+			<div class="grid-item">
+				<span th:text="${product.category}">}</span>
+			</div>
+			<div class="grid-item">
+				<span th:text="${product.product_id}"></span>
+				</div>
+			<div class="grid-item">
+				<form method="get">
+			<button  th:formaction="@{/products/create/{id}(id = ${product.product_id})}" >
+				Edit
+				</button>
+					</form>
+				<form method="post">
+			<button  >
+				<a th:href="@{/products/delete/{id}(id = ${product.product_id})}">Delete</a>
+				</button>
+					</form>
+				</div>
+		</span>
+		<span th:each="page : ${pages}">
+			<a th:href="@{/products?page={page}(page=${page})}" th:text="${page}"> </a>
+		</span>
+	</div>
+<div th:if="${!visible}">
+	<h1> NO PRODUCTS IN THIS CATEGORY</h1>
+</div>
+
+</body>
+</html>
